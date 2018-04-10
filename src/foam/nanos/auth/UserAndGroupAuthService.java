@@ -60,7 +60,7 @@ public class UserAndGroupAuthService
       throw new AuthenticationException("User not found: " + session.getUserId());
     }
 
-    return (User) Password.sanitize(user);
+    return user;
   }
 
   /**
@@ -120,7 +120,7 @@ public class UserAndGroupAuthService
     session.setUserId(user.getId());
     session.setContext(session.getContext().put("user", user));
     sessionDAO_.put(session);
-    return (User) Password.sanitize(user);
+    return user;
   }
 
   /**
@@ -145,7 +145,7 @@ public class UserAndGroupAuthService
     session.setUserId(user.getId());
     session.setContext(session.getContext().put("user", user));
     sessionDAO_.put(session);
-    return (User) Password.sanitize(user);
+    return user;
   }
 
   public User loginByEmail(X x, String email, String password) throws AuthenticationException {
@@ -170,7 +170,7 @@ public class UserAndGroupAuthService
     session.setUserId(user.getId());
     session.setContext(session.getContext().put("user", user));
     sessionDAO_.put(session);
-    return (User) Password.sanitize(user);
+    return user;
   }
 
   /**
@@ -269,7 +269,7 @@ public class UserAndGroupAuthService
     user.setPassword(Password.hash(newPassword));
     user = (User) userDAO_.put(user);
     session.setContext(session.getContext().put("user", user));
-    return (User) Password.sanitize(user);
+    return user;
   }
 
   /**
