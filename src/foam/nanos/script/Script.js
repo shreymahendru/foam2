@@ -30,7 +30,7 @@ foam.CLASS({
     'java.io.PrintStream',
     'java.util.Date',
     'java.util.List',
-    'static foam.mlang.MLang.*',
+    'static foam.mlang.MLang.*'
   ],
 
   tableColumns: [
