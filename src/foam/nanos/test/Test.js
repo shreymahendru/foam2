@@ -9,7 +9,7 @@ foam.CLASS({
   name: 'Test',
   extends: 'foam.nanos.script.Script',
 
-  imports: [ 'testDAO as scriptDAO' ],
+  imports: ['testDAO as scriptDAO'],
 
   javaImports: [
     'bsh.EvalError',
@@ -21,14 +21,17 @@ foam.CLASS({
   ],
 
   tableColumns: [
-    'id', 'enabled', 'description', 'server', 'passed', 'failed', 'lastRun', 'lastDuration', 'status', 'run'
+    'id', 'enabled', 'description', 'server', 'passed', 'failed',
+    'lastRun', 'lastDuration', 'status', 'run'
   ],
 
-  searchColumns: [ ],
+  searchColumns: [],
 
   documentation: `
     A scriptable Unit Test.
-    Tests can be run on either the server in BeanShell or on the client in Javascript.
+    The test scripts created through the GUI run either on the server in BeanShell or on the client in Javascript.
+    The test scripts can be created in java as well which lives in the project repository.
+    Check foam.nanos.test.ExampleTest for reference for creating tests in java.
     Call test(boolean exp, String message) for each test, where 'exp' evaluates to
     true if the test passed and false if it failed.
   `,
@@ -39,7 +42,7 @@ foam.CLASS({
       name: 'passed',
       visibility: foam.u2.Visibility.RO,
       tableCellFormatter: function(value) {
-        if ( value ) this.start().style({color: '#0f0'}).add(value).end();
+        if ( value ) this.start().style({ color: '#0f0' }).add(value).end();
       }
     },
     {
@@ -47,8 +50,16 @@ foam.CLASS({
       name: 'failed',
       visibility: foam.u2.Visibility.RO,
       tableCellFormatter: function(value) {
-        if ( value ) this.start().style({color: '#f00'}).add(value).end();
+        if ( value ) this.start().style({ color: '#f00' }).add(value).end();
       }
+    },
+    {
+      class: 'String',
+      name: 'javaTestFile',
+      documentation: `
+      This property takes the name of the test Class Eg:foam.nanos.test.ExampleTest
+      `,
+      value: null
     }
   ],
 
